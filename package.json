@@ -1,0 +1,22 @@
+{
+  "name": "reactcv-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --verbose --coverage"
+  },
+  "keywords": [],
+  "author": "Rawan Nujoom <rawan.nujoom@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.16",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "@code-fellows/supergoose": "^1.0.2",
+    "jest": "^26.0.1"
+  }
+}
