@@ -8,6 +8,7 @@ const Portfolio = require('../moudles/portfolio/portfolio-model');
 
 router.get('/portfolio', getportfolio);
 router.post('/portfolio', postportfolio);
+router.put('/portfolio/:id', updateportfolio)
 router.delete('/portfolio/:id', deleteportfolio);
 
 function getportfolio(req, res, next) {
@@ -35,5 +36,11 @@ function deleteportfolio(req,res, next) {
             res.status(200).json(data);
         }).catch(next);
 }
-
+function updateportfolio(req,res, next) {
+    // CRUD operation
+    Portfolio.update(req.params.id,req.body)
+        .then(data => {
+            res.status(200).json(data);
+        }).catch(next);
+}
 module.exports = router;
