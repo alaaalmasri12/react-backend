@@ -3,44 +3,75 @@
 const express = require('express');
 const router = express.Router();
 
-// require food model  , use it in my router fnts.
 const Portfolio = require('../moudles/portfolio/portfolio-model');
+const review = require('../moudles/reviews/review-model');
 
-router.get('/portfolio', getportfolio);
-router.post('/portfolio', postportfolio);
-router.put('/portfolio/:id', updateportfolio)
-router.delete('/portfolio/:id', deleteportfolio);
+function getModel(req, res, next) {
+    let model = req.params.model; 
+    console.log(model);
+    switch(model) {
+        case "portfolio":
+            req.model = Portfolio;
+            console.log(req.model);
+            next();
+            return;
+        case "review":
+            req.model =review;
+            next();
+            return;
+        default:
+            next("Invalid Model");
+            return;
+    }
+}
+// use router.param to dynamically load the suitable model.
+router.param('model', getModel);
+router.get('/:model', handleGetAll);
+router.get('/:model/:id',handleGetOne);
+router.post('/:model', handlePost )
+router.put('/:model/:id',updateOne);
+router.put('/:model/:id',deleteOne);
 
-function getportfolio(req, res, next) {
-    // CRUD operation
-    Portfolio.get()
+
+
+function handleGetAll(req, res, next) {
+    console.log('enterd');
+    req.model.get()
+    .then(data => {
+        res.status(200).json(data);
+    })
+    .catch(next);
+}
+
+function handlePost(req, res, next) {
+    req.model
+        .post(req.body)
         .then(data => {
-            res.status(200).json(data);
-        })
+            res.status(201).json(data); 
+        }).catch(next);
+}
+
+function handleGetOne(req, res, next) {
+    let id = req.params.id;
+    req.model
+        .get(id)
+        .then(record => res.json(record))
+        .catch(next);
+}
+function updateOne(req, res, next) {
+    let id = req.params.id;
+    req.model
+        .update(id)
+        .then(record => res.json(record))
+        .catch(next);
+}
+function deleteOne(req, res, next) {
+    let id = req.params.id;
+    req.model
+        .update(id)
+        .then(record => res.json(200))
         .catch(next);
 }
 
-function postportfolio(req,res, next ) {  
-      // CRUD operation
-    Portfolio.post(req.body)
-        .then(data => {
-            res.status(201).json(data); // {_id: monogid, }
-        }).catch(next);
-}
 
-function deleteportfolio(req,res, next) {
-    // CRUD operation
-    console.log("----->>>> testing delete route ")
-    Portfolio.delete(req.params.id)
-        .then(data => {
-            res.status(200).json(data);
-        }).catch(next);
-}
-function updateportfolio(req,res, next) {
-    // CRUD operation
-    Portfolio.update(req.params.id,req.body)
-        .then(data => {
-            res.status(200).json(data);
-        }).catch(next);
-}
 module.exports = router;

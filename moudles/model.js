@@ -1,40 +1,26 @@
 'use strict';
 // Generic mongo model: will be extended in other models
 
+'use strict';
+
 class Model {
-    /**
-     * Model Constructor
-     * @param {Object} schema - mongo schema
-     */
+
     constructor(schema) {
         this.schema = schema;
     }
 
-    /**
-     * 
-     * @param {String} _id optional mongo record id
-     * @return {*}
-     */
     get(_id) {
-        let queryObject = _id ? {_id} : {};
-        // .find(queryObject) : {_id: _id}, {}
-        return this.schema.find(queryObject);
+        if (_id) {
+            return this.schema.findById(_id);
+        } else {
+            return this.schema.find({});
+        }
     }
-    /**
-     * 
-     * @param {object} record matches the schema format
-     * @return {*}
-     */
+
     post(record) {
         let newRecord = new this.schema(record);
         return newRecord.save();
     }
-    /**
-     * 
-     * @param {string} _id mongo record id
-     * @param {object} record shcema object format
-     * @return {*}
-     */
     update(_id, record) {
         return this.schema.findByIdAndUpdate(_id, record, {new: true});
     }
@@ -47,8 +33,6 @@ class Model {
         // return promise
         return this.schema.findByIdAndDelete(_id);
     }
-
 }
-
 
 module.exports = Model;
