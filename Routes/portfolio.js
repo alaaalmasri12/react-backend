@@ -30,11 +30,7 @@ router.get('/:model', handleGetAll);
 router.get('/:model/:id',handleGetOne);
 router.post('/:model', handlePost )
 router.put('/:model/:id',updateOne);
-router.put('/:model/:id',deleteOne);
-router.post('/userreview', handlePost);
-router.get('/userreview', handlePost);
-router.put('/userreview', handlePost);
-router.delete('/userreview', handlePost);
+router.delete('/:model/:id',deleteOne);
 
 
 
