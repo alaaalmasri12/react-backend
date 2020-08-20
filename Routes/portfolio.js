@@ -31,8 +31,16 @@ router.get('/:model/:id',handleGetOne);
 router.post('/:model', handlePost )
 router.put('/:model/:id',updateOne);
 router.put('/:model/:id',deleteOne);
+router.post('/userreview', handlePost);
+router.get('/userreview', handlePost);
+router.put('/userreview', handlePost);
+router.delete('/userreview', handlePost);
 
 
+
+
+
+module.exports = router;
 
 function handleGetAll(req, res, next) {
     console.log('enterd');

@@ -24,6 +24,12 @@ class Model {
     update(_id, record) {
         return this.schema.findByIdAndUpdate(_id, record, {new: true});
     }
+
+    
+    async create(record) {
+        let newUser = new userSchema(record);
+        return await newUser.save(record);
+      }
     /**
      * 
      * @param {string} _id 
