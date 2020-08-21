@@ -2,9 +2,6 @@
 
 const express = require('express');
 const router = express.Router();
-router.post('/contact',(req,res)=>{
-    res.send('hello');
-});
 
 // var request = require('request');
 // const app = express();
@@ -45,6 +42,27 @@ router.post('/contact',(req,res)=>{
 //         console.log("message has been sent");
 //     });
 // }
+function getZip(req, res, next) {
+    // random zip number, it starts with zero
+    req.body.zip = Math.floor(Math.random() * 10000).toString().padStart(5, 0);
+    next();
+}
+
+router.param('city', getZip);
+
+// localhost:4000/places/amman
+
+router.post('/places/amman', (req, res, next)=> {
+    res.send(`Zip:::: ${req.body.zip} `); //Zip:::: undefined
+});
+
+router.put('/places/:city', (req, res, next)=> {
+    res.send(`Zip:::: ${req.body.zip} `); // Zip:::: 00391
+});
+
+router.delete('/xxx/yyyy/:city', (req, res, next)=> {
+    res.send(`Zip:::: ${req.body.zip} `) // // Zip:::: 00452
+});
 res.status(200).send('email sent');
 
 module.exports = router;
