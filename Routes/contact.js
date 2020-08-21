@@ -45,30 +45,50 @@
 // }
 // module.exports = router;
 'use strict';
-
+const app = express();
 const express = require('express');
+var request = require('request');
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 const router = express.Router();
 
-function getZip(req, res, next) {
-    // random zip number, it starts with zero
-    req.body.zip = Math.floor(Math.random() * 10000).toString().padStart(5, 0);
-    next();
+function contact(req, res) {
+   var firstname = req.body.firstname;
+    var lastname = req.body.lastname;
+    var email = req.body.email;
+    var Phone = req.body.phone;
+    var msg = req.body.message;
+    var data = {
+        "members": [{
+            email_address: email,
+            status: 'subscribed',
+            merge_fields: {
+                FNAME: firstname,
+                LNAME: lastname,
+                PHONE: Phone,
+                MMERGE5: msg
+            }
+        }],
+    }
+    var JSONdata = JSON.stringify(data);
+    console.log(JSONdata);
+    var options = {
+        url: 'https://us19.api.mailchimp.com/3.0/lists/d497c7c7f3',
+        method: 'POST',
+        headers: {
+            "Authorization": "alaa c2022d468ec18180c4be2692c07ad7e9-us19"
+        },
+        body: JSONdata
+    }
+    request(options, (error, response, body) => {
+        console.log("message has been sent");
+    });
+    res.status(200).send('email sent');
 }
-
-router.param('city', getZip);
-
-// localhost:4000/places/amman
-
-router.get('/places/amman', (req, res, next)=> {
-    res.send(`Zip:::: ${req.body.zip} `); //Zip:::: undefined
+router.param('contact');
+router.post('/:contact', (req, res)=> {
+   contact();
 });
 
-router.get('/places/:city', (req, res, next)=> {
-    res.send(`Zip:::: ${req.body.zip} `); // Zip:::: 00391
-});
-
-router.get('/xxx/yyyy/:city', (req, res, next)=> {
-    res.send(`Zip:::: ${req.body.zip} `) // // Zip:::: 00452
-});
 
 module.exports = router;
