@@ -12,7 +12,6 @@ function getModel(req, res, next) {
     switch(model) {
         case "portfolio":
             req.model = Portfolio;
-            console.log(req.model);
             next();
             return;
         case "review":
