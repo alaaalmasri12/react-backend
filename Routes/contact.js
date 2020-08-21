@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 router.param('contact', getZip);
 
-router.post('/contact',handlesomething);
+router.post('/:contact',handlesomething);
 
 function handlesomething(req, res) {
     // var firstname = req.body.firstname;
