@@ -18,7 +18,6 @@ const mongooseOptions = {
 };
 
 mongoose.connect(MONGODB_URI, mongooseOptions) 
-.then(console.log('**mongoDB connected**'));
 
 ////starting the server
 server.start(process.env.PORT);

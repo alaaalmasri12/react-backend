@@ -25,7 +25,7 @@ class Model {
         return this.schema.findByIdAndUpdate(_id, record, {new: true});
     }
 
-    
+
     async create(record) {
         let newUser = new userSchema(record);
         return await newUser.save(record);
