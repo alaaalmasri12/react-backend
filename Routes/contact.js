@@ -6,7 +6,7 @@ var request = require('request');
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-router.param('contact', getZip);
+router.param('contact');
 
 router.post('/:contact',handlesomething);
 
