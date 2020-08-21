@@ -2,6 +2,10 @@
 
 const express = require('express');
 const router = express.Router();
+router.post('/contact',(req,res)=>{
+    res.send('hello');
+});
+
 // var request = require('request');
 // const app = express();
 // app.use(express.json());
