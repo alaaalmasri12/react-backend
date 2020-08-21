@@ -9,7 +9,7 @@ app.use(express.urlencoded({ extended: true }));
 // use router.param to dynamically load the suitable model.
 router.post('/contact',handlesomething);
 
-async function handlesomething(req, res) {
+function handlesomething(req, res) {
     var firstname = req.body.firstname;
     var lastname = req.body.lastname;
     var email = req.body.email;
@@ -30,14 +30,14 @@ async function handlesomething(req, res) {
     var JSONdata = JSON.stringify(data);
     console.log(JSONdata);
     var options = {
-        url: 'https://us19.api.mailchimp.com/3.0/lists/d497c7c7f3',
+        url: 'https://us19.api.mailchimp.com/3.0/lists/0a310089e7',
         method: 'POST',
         headers: {
             "Authorization": "alaa c2022d468ec18180c4be2692c07ad7e9-us19"
         },
         body: JSONdata
     }
-    await request(options, (error, response, body) => {
+    request(options, (error, response, body) => {
         console.log("message has been sent");
     });
     res.status(200).send('email sent');
