@@ -32,11 +32,12 @@ function handlesomething(req, res) {
     mode: 'no-cors',
     cache: 'no-cache',
     credentials: 'same-origin',
+
     url: 'https://us19.api.mailchimp.com/3.0/lists/8b52c758a6',
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
-      "Authorization": "alaa eb52377b85cbed201be21516f0803c80-us19"
+        'Content-type': 'Access-Control-Allow-Headers' ,
+        "Authorization": "alaa eb52377b85cbed201be21516f0803c80-us19"
     },
     redirect: 'follow',
     referrerPolicy: 'no-referrer',
