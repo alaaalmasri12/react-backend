@@ -37,7 +37,6 @@ function handlesomething(req, res) {
         body: JSONdata
     }
     request(options, (error, response, body) => {
-        console.log(response);
         console.log("message has been sent");
     });
     res.status(200).send('email sent');
