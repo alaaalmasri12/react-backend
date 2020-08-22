@@ -29,7 +29,7 @@ function handlesomething(req, res) {
     }
     var JSONdata = JSON.stringify(data);
     var options = {
-    mode: 'cors',
+    mode: 'no-cors',
     cache: 'no-cache',
     credentials: 'same-origin',
     url: 'https://us19.api.mailchimp.com/3.0/lists/8b52c758a6',
