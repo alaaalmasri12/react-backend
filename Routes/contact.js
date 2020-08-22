@@ -28,16 +28,16 @@ function handlesomething(req, res) {
         }],
     }
     var JSONdata = JSON.stringify(data);
-    console.log(JSONdata);
     var options = {
-        url: 'https://us19.api.mailchimp.com/3.0/lists/0a310089e7',
+        url: 'https://us19.api.mailchimp.com/3.0/lists/8b52c758a6',
         method: 'POST',
         headers: {
-            "Authorization": "alaa c2022d468ec18180c4be2692c07ad7e9-us19"
+            "Authorization": "alaa eb52377b85cbed201be21516f0803c80-us19"
         },
         body: JSONdata
     }
     request(options, (error, response, body) => {
+        console.log(response);
         console.log("message has been sent");
     });
     res.status(200).send('email sent');
